@@ -1,11 +1,364 @@
-<!doctype html>
-<html lang="zh-CN">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>E2SL</title>
-  </head>
-  <body>
-    E<sup>2</sup>SL: Efficient Depth Sensing from Event-based Structured Light
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <!-- Additional SEO -->
+  <meta name="theme-color" content="#2563eb">
+  <meta name="msapplication-TileColor" content="#2563eb">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  
+  <!-- Preconnect for performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://ajax.googleapis.com">
+  <link rel="preconnect" href="https://documentcloud.adobe.com">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+
+  <!-- TODO: Replace with your paper title and authors -->
+  <title>E2SL</title>
+   
+  <!-- Critical CSS - Load synchronously -->
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+  
+  <!-- Non-critical CSS - Load asynchronously -->
+  <link rel="preload" href="static/css/bulma-carousel.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="static/css/bulma-slider.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="static/css/fontawesome.all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  
+  <!-- Fallback for browsers that don't support preload -->
+  <noscript>
+    <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+    <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+    <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  </noscript>
+  
+  <!-- Fonts - Optimized loading -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Defer non-critical JavaScript -->
+  <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script defer src="static/js/bulma-carousel.min.js"></script>
+  <script defer src="static/js/bulma-slider.min.js"></script>
+  <script defer src="static/js/index.js"></script>
+  
+</head>
+<body>
+
+
+  <!-- Scroll to Top Button -->
+  <button class="scroll-to-top" onclick="scrollToTop()" title="Scroll to top" aria-label="Scroll to top">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <main id="main-content">
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container" style="max-width: 1900px;">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <!-- TODO: Replace with your paper title -->
+            <!-- <h1 class="title is-1 publication-title">EventSTU: Event-Guided Efficient Spatio-Temporal Understanding<br>for Video Large Language Models</h1> -->
+            <h1 class="title is-1 publication-title">
+              <img src="./static/images/rocket.svg"
+                  style="width: 1.0em; height: 1.0em; vertical-align: bottom; margin-right: 10px;" 
+              >
+              E<sup>2</sup>SL: Efficient Depth Sensing from Event-based <br> Structured Light
+            </h1>
+            <div style="font-size: 1.4em; font-weight: 600;">
+              IEEE VR 2026 / IEEE TVCG
+            </div>
+            
+            <br>
+            <div class="is-size-5 publication-authors">
+              <!-- TODO: Replace with your paper authors and their personal links -->
+              <span class="author-block">
+                <a href="https://scholar.google.com/citations?hl=zh-CN&user=6lIHNyMAAAAJ" target="_blank">Xin Dong</a><sup>1</sup>,</span>
+              <span class="author-block">
+                <a href="https://scholar.google.com/citations?hl=zh-CN&user=-xnJpxsAAAAJ" target="_blank">Jiacheng Fu</a><sup>1</sup>,</span>
+              <span class="author-block">
+                <a href="https://scholar.google.com/citations?hl=zh-CN&user=hcIuWuIAAAAJ" target="_blank">Yue Li</a><sup>1</sup>,</span>
+              <span class="author-block">
+                <a href="https://scholar.google.com/citations?hl=zh-CN&user=9xtKbMMAAAAJ" target="_blank">Wenming Weng</a><sup>1</sup>,</span>
+              <span class="author-block">
+                <a href="https://scholar.google.com/citations?hl=zh-CN&user=LatWlFAAAAAJ" target="_blank">Yueyi Zhang</a><sup>2</sup>,</span>
+              <br>
+              <span class="author-block">
+                <a href="https://scholar.google.com/citations?hl=zh-CN&user=GyyV2lkAAAAJ" target="_blank">Bingyao Huang</a><sup>3</sup>,</span>
+              <span class="author-block">
+                <a href="https://scholar.google.com/citations?hl=zh-CN&user=Snl0HPEAAAAJ" target="_blank">Zhiwei Xiong</a><sup>1*</sup>,</span>
+
+                  </div>
+
+                  <div class="is-size-5 publication-authors">
+                    <!-- TODO: Replace with your institution and conference/journal info -->
+                    <span class="author-block"><sup>1</sup>University of Science and Technology of China</span> <br>
+                    <span class="author-block"><sup>2</sup>Midea Group</span>
+                    <span class="author-block"><sup>3</sup>Southwest University</span>
+                    <br>
+                    <span class="author-block" style="font-size: 0.80em; font-weight: 100;">
+                      <sup>*</sup>Indicates the corresponding author
+                    </span>
+                  </div>
+
+                  <!-- Paper Button -->
+                  <span class="link-block">
+                    <a href="" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                      <span class="icon">
+                        <!-- 你的 Paper SVG 图标 -->
+                        <svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" style="width: 1.1em; height: 1.1em; fill: currentColor;">
+                          <path d="M341.375 240.125h159.375c15.28125 0 27.65625 12.375 27.65625 27.65625S516.03125 295.4375 500.75 295.4375H341.375c-15.28125 0-27.65625-12.375-27.65625-27.65625S326.09375 240.125 341.375 240.125z"></path>
+                          <path d="M450.125 270.125v111.5625c0 15.28125-12.375 27.65625-27.65625 27.65625S394.8125 396.96875 394.8125 381.6875V270.125c0-15.28125 12.375-27.65625 27.65625-27.65625S450.125 254.84375 450.125 270.125zM335.28125 502.625h362.8125c11.90625 0 21.5625 9.65625 21.5625 21.5625s-9.65625 21.5625-21.5625 21.5625h-362.8125c-11.90625 0-21.5625-9.65625-21.5625-21.5625s9.65625-21.5625 21.5625-21.5625z m190.3125-114.375h171.5625c11.90625 0 21.5625 9.65625 21.5625 21.5625s-9.65625 21.5625-21.5625 21.5625h-171.5625c-11.90625 0-21.5625-9.65625-21.5625-21.5625s9.65625-21.5625 21.5625-21.5625z m-190.3125 235.3125h362.8125c11.90625 0 21.5625 9.65625 21.5625 21.5625s-9.65625 21.5625-21.5625 21.5625h-362.8125c-11.90625 0-21.5625-9.65625-21.5625-21.5625s9.65625-21.5625 21.5625-21.5625z m0 120h258.75c11.90625 0 21.5625 9.65625 21.5625 21.5625s-9.65625 21.5625-21.5625 21.5625h-258.75c-11.90625 0-21.5625-9.65625-21.5625-21.5625s9.65625-21.5625 21.5625-21.5625z m492.1875-428.8125h-187.5c-26.90625 0-48.75-21.84375-48.75-48.75V95.75h43.125v170.25c0 3.09375 2.53125 5.625 5.625 5.625h187.5v43.125z"></path>
+                          <path d="M792.78125 924.5h-552.1875c-27.375 0-49.6875-22.3125-49.6875-49.6875V130.4375c0-27.375 22.3125-49.6875 49.6875-49.6875h38.4375c11.90625 0 21.5625 9.65625 21.5625 21.5625s-9.65625 21.5625-21.5625 21.5625h-38.4375c-3.65625 0-6.5625 2.90625-6.5625 6.5625v744.375c0 3.65625 2.90625 6.5625 6.5625 6.5625h552.1875c3.65625 0 6.5625-2.90625 6.5625-6.5625V289.34375L610.25 123.875H438.40625c-11.90625 0-21.5625-9.65625-21.5625-21.5625s9.65625-21.5625 21.5625-21.5625h180c5.25 0 10.3125 1.875 14.15625 5.34375l202.5 177.1875c4.6875 4.125 7.40625 10.03125 7.40625 16.21875v595.3125c0 27.375-22.3125 49.6875-49.6875 49.6875zM381.125 123.875h-36.5625c-11.90625 0-21.5625-9.65625-21.5625-21.5625s9.65625-21.5625 21.5625-21.5625h36.5625c11.90625 0 21.5625 9.65625 21.5625 21.5625s-9.65625 21.5625-21.5625 21.5625z"></path>
+                        </svg>
+                      </span>
+                      <span>Paper</span>
+                    </a>
+                  </span>
+
+                  <!-- Code Button -->
+                  <span class="link-block">
+                    <a href="https://github.com/Dongxin000/E2SL" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                      <span class="icon">
+                        <!-- 你的 Code/GitHub SVG 图标 -->
+                        <svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" style="width: 1.1em; height: 1.1em; fill: currentColor;">
+                          <path d="M64 512c0 195.2 124.8 361.6 300.8 422.4 22.4 6.4 19.2-9.6 19.2-22.4v-76.8c-134.4 16-140.8-73.6-150.4-89.6-19.2-32-60.8-38.4-48-54.4 32-16 64 3.2 99.2 57.6 25.6 38.4 76.8 32 105.6 25.6 6.4-22.4 19.2-44.8 35.2-60.8-144-22.4-201.6-108.8-201.6-211.2 0-48 16-96 48-131.2-22.4-60.8 0-115.2 3.2-121.6 57.6-6.4 118.4 41.6 124.8 44.8 32-9.6 70.4-12.8 112-12.8 41.6 0 80 6.4 112 12.8 12.8-9.6 67.2-48 121.6-44.8 3.2 6.4 25.6 57.6 6.4 118.4 32 38.4 48 83.2 48 131.2 0 102.4-57.6 188.8-201.6 214.4 22.4 22.4 38.4 54.4 38.4 92.8v112c0 9.6 0 19.2 16 19.2C832 876.8 960 710.4 960 512c0-246.4-201.6-448-448-448S64 265.6 64 512z"></path>
+                        </svg>
+                      </span>
+                      <span>Code</span>
+                    </a>
+                  </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Teaser Image -->
+<section class="hero teaser">
+  <!-- 修改 1: 这里用 style="max-width: ..." 来完全控制宽度 -->
+  <div class="container" style="max-width: 1500px;">
+    <div class="hero-body">
+      <!-- Image -->
+      <!-- <img src="static\images\Teaser3.svg" alt="EventSTU Method Overview" style="width: 100%;">
+       -->
+       <div style="text-align: center;">
+        <video
+          src="./static/videos/teaser.mp4"
+          autoplay
+          loop
+          muted
+          playsinline
+          controls
+          style="width: 65%;">
+        </video>
+      </div>
+      
+      
+      <!-- Caption -->
+      <!-- 修改 2: 建议用 content class 替代 subtitle，对于长文本更易读。
+           has-text-justified 让两端对齐，看起来更像论文排版 -->
+      <!-- <div class="content has-text-centered" style="margin-top: 15px; font-size: 1.2em;">
+        <p>
+          <b>Short video shows our work.</b>
+        </p>
+      </div> -->
+
+    </div>
+  </div>
+</section>
+<!-- End teaser image -->
+
+<!-- Paper abstract -->
+<section class="section hero is-light">
+  <div class="container is-max-widescreen">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <!-- TODO: Replace with your paper abstract -->
+          <p>
+            Structured light (SL) is a popular approach for 3D reconstruction. Most SL techniques rely on frame-based cameras and are often not robust in high-speed dynamic scenes. Recently, event cameras have sparked growing interest in high-speed SL imaging, due to their high temporal resolution. The event-based SL enjoys the high-speed data acquisition, however, most existing methods tend to pursue the reconstruction accuracy but sacrificing the computational efficiency, limiting the applicability in real-world scenarios. To this end, we propose <b>E<sup>2</sup>SL</b>, an <strong>E</strong>fficient deep network tailored for monocular <b>E</b>vent-based <b>SL</b>. Specifically, <b>E<sup>2</sup>SL</b> comprises three key components: binary embedding lookup table (BE-LUT), spatial context enhancement (SCE), and geometric-prior regression (GPR). Given the input event frame, BE-LUT, which is precomputed and stored, first retrieves the features efficiently. Then, SCE extends the receptive field of the features and captures the spatial context. Finally, GPR conducts the geometric-prior-based tree classification for fast and robust depth estimation. To support training and evaluation, we contribute an event-based SL simulator, which generates a large-scale and diverse synthetic dataset. Besides, we develop an event-based SL prototype and collect a dataset with accurate ground truth for real-world evaluation. Extensive experiments demonstrate that our method achieves state-of-the-art accuracy while maintaining a per-frame reconstruction time of 7.7 ms, meeting the demands of high-speed depth sensing.          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End paper abstract -->
+
+
+<!-- Benchmark Image Section -->
+<section class="hero is-light is-small">
+  <div class="hero-body">
+    <!-- 这里设置了 max-width: 1500px -->
+    <div class="container" style="max-width: 1200px;">
+      
+      <h2 class="title is-3 has-text-centered">Overview</h2>
+
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-full">
+          <!-- 图片 -->
+          <img src="static\images\teaser.svg" alt="EventBench Details" style="width: 80%;"/>
+          
+          <!-- Caption -->
+          <div class="content has-text-centered" style="margin-top: 16px;">
+            <p>
+              Overview of our framework. (1) Event-based structured light dataset synthesis and proposed E<sup>2</sup>SL training. (2) Real-time reconstructed point clouds from the dynamic real-world scenarios.
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- Benchmark Image Section -->
+<section class="hero is-light is-small">
+  <div class="hero-body">
+    <!-- 这里设置了 max-width: 1500px -->
+    <div class="container" style="max-width: 1200px;">
+      
+      <h2 class="title is-3 has-text-centered">Synthetic Dataset & Real-world System</h2>
+
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-full">
+          <!-- 图片 -->
+          <img src="static\images\event_syn.svg" alt="EventBench Details" style="width: 80%;"/>
+          
+          <!-- Caption -->
+          <div class="content has-text-centered" style="margin-top: 16px;">
+            <p>
+              The pipeline for constructing the synthetic event-based SL dataset. (1) Based on the frame-based SL renderer, the rendered frames are rendered by controlling the on and off of the projector. (2) The logarithmic intensity difference (log-diff) frames between adjacent frames are then calculated.  (3) The event stream is triggered based on log-diff frames. (4) Finally, the positive events are accumulated to generate the event binary frames.
+            </p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-full">
+          <!-- 图片 -->
+          <img src="static\images\real_syn_align.svg" alt="EventBench Details" style="width: 80%;"/>
+          
+          <!-- Caption -->
+          <div class="content has-text-centered" style="margin-top: 16px;">
+            <p>
+              The pipeline for the alignment between event-based SL real-world and simulated systems. (1) We set up the event-based SL system. (2) The calibration event frames are captured using the circular pattern. (3) Calibration is performed, followed by epipolar rectification to obtain geometric parameters. (4) Speckle pattern. (5) The speckle pattern is rectified and padded. (6) Rectified geometric parameters and the processed speckle pattern are fed into the SL simulator.
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+<!-- End Benchmark Image Section -->
+
+<!-- Benchmark Image Section -->
+<section class="hero is-light is-small">
+  <div class="hero-body">
+    <!-- 这里设置了 max-width: 1500px -->
+    <div class="container" style="max-width: 1200px;">
+      
+      <h2 class="title is-3 has-text-centered">Method</h2>
+
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-full">
+          <!-- 图片 -->
+          <img src="static\images\pipeline.svg" alt="EventBench Details" style="width: 80%;"/>
+          
+          <!-- Caption -->
+          <div class="content has-text-centered" style="margin-top: 16px;">
+            <p>
+              The overview of efficient event-based SL (E<sup2</sup>2SL) network. (a) The binary embedding lookup table (BE-LUT) is designed for efficient feature extraction, and with k=5 as an illustration. (b) The spatial context enhancement (SCE) module for efficiently expanding the spatial dependencies and improving robustness, and (c) the geometric-prior regression (GPR) for fast and accurate depth estimation. These modules work together to achieve a balanced trade-off between speed and accuracy in real-time event-based monocular SL depth estimation.
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- Benchmark Image Section -->
+<section class="hero is-light is-small">
+  <div class="hero-body">
+    <!-- 这里设置了 max-width: 1500px -->
+    <div class="container" style="max-width: 1200px;">
+      
+      <h2 class="title is-3 has-text-centered">Results</h2>
+
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-full">
+          <!-- 图片 -->
+          <img src="static\images\real_qual.png" alt="EventBench Details" style="width: 80%;"/>
+
+          <!-- Caption -->
+          <div class="content has-text-centered" style="margin-top: 15px;">
+            <p>
+              Qualitative results in real-world test set. Ground truth and scene intensity are shown in 1<sup>st</sup> column. Disparity and error maps are shown in 2<sup>nd</sup>-6<sup>th</sup> columns. Color coding is applied for error maps of 0–2 pixels, with outliers (>2  pixels) being black.
+            </p>
+          </div>
+
+
+          <img src="static\images\dy.svg" alt="EventBench Details" style="width: 80%;"/>
+          
+          <!-- Caption -->
+          <div class="content has-text-centered" style="margin-top: 15px;">
+            <p>
+              Point cloud qualitative results of SGBM and our method on real-world dynamic scenes with comparisons of the completeness. Scenes are shown in 1<sup>st</sup> row. Point clouds reconstructed from different methods are shown in 2<sup>nd</sup>-3<sup>rd</sup> rows.
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+<!-- End Benchmark Image Section -->
+
+
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+
+          <p>
+            This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a> which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
+            You are free to borrow the source code of this website, we just ask that you link back to this page in the footer. <br> This website is licensed under a <a rel="license"  href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+
+
+
+<!-- Statcounter tracking code -->
+  
+<!-- You can add a tracker to track page visits by creating an account at statcounter.com -->
+
+    <!-- End of Statcounter Code -->
+
   </body>
-</html>
+  </html>
